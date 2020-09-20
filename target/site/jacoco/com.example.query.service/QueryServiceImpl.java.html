@@ -49,7 +49,7 @@ import org.springframework.stereotype.Service;
 <span class="fc bfc" id="L49" title="All 2 branches covered.">		    	 for (Map.Entry&lt;String,List&lt;T&gt;&gt; entry : groupedMap.entrySet()){</span>
 <span class="fc" id="L50">		    		 grouped.add(entry.getValue().get(0));</span>
 		    		} 
-<span class="pc bpc" id="L52" title="1 of 2 branches missed.">		    	 if(orderBy!=null) {</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">		    	 if(orderBy!=null) {</span>
 		    	
 <span class="fc" id="L54">			    	  grouped =grouped.stream().sorted(orderBy).collect(Collectors.toList()); </span>
 		    	 }
@@ -57,7 +57,7 @@ import org.springframework.stereotype.Service;
 <span class="fc" id="L57">		    } else {</span>
 <span class="fc" id="L58">		    	grouped =result;</span>
 		    }
-<span class="pc bpc" id="L60" title="2 of 4 branches missed.">		   if( limit&gt; 0 &amp;&amp;  limit &lt; grouped.size() ) {</span>
+<span class="fc bfc" id="L60" title="All 4 branches covered.">		   if( limit&gt; 0 &amp;&amp;  limit &lt; grouped.size() ) {</span>
 <span class="fc" id="L61">			  grouped = grouped.subList(0, limit);</span>
 		   } 
 			// 输出字符串

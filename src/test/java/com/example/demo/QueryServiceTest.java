@@ -19,7 +19,7 @@ public class QueryServiceTest  {
 	 private  static QueryService   queryService  = new QueryServiceImpl();;
  
 
-    @Test
+   @Test
    public void TestQuery(){
 	    
 	   	 List<SqueryEntity>  lists = genLists(100000); 
@@ -38,7 +38,7 @@ public class QueryServiceTest  {
 		 
    }
    
-    // @Test
+   @Test
    public void TestGroup(){
 	    
 	   	 List<SqueryEntity>  lists = genLists(100); 
@@ -53,7 +53,7 @@ public class QueryServiceTest  {
 		 
    }
    
-   // @Test
+   @Test
    public void TestWhere(){
 	    
 	   	 List<SqueryEntity>  lists = genLists(1000); 
@@ -68,7 +68,7 @@ public class QueryServiceTest  {
 		 
    }
    
-  // @Test
+   @Test
    public void TestOrderBy(){
 	    
 	   	 List<SqueryEntity>  lists = genLists(1000); 

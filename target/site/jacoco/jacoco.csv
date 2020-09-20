@@ -1,4 +1,4 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 query,com.example.query,QueryApplication,8,0,0,0,3,0,2,0,2,0
 query,com.example.query.service,SqueryEntity,4,34,0,0,2,14,1,10,1,10
-query,com.example.query.service,QueryServiceImpl,0,113,3,15,0,25,3,8,0,2
+query,com.example.query.service,QueryServiceImpl,0,113,0,18,0,25,0,11,0,2
