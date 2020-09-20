@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>QueryServiceImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">query</a> &gt; <a href="index.source.html" class="el_package">com.example.query.service</a> &gt; <span class="el_source">QueryServiceImpl.java</span></div><h1>QueryServiceImpl.java</h1><pre class="source lang-java linenums">package com.example.query.service;
+
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+ @Service
+<span class="fc" id="L15">public class QueryServiceImpl implements QueryService {</span>
+
+	 /**
+     * 根据条件查询列表
+     *
+     * @param list: 对改list进行查询;
+     * @param where:查询条件，如:where=(SqueryEntity w) -&gt; w.getId() ==1 &amp;&amp; w.getId() ==1;
+     * @param groupBy:分组 ，如:vgroupBy=(SqueryEntity g)-&gt; g.getId()  +&quot;#&quot;+  g.getName();
+     * @param orderBy:排序，如:orderBy=Comparator.comparing(SqueryEntity::getId);
+     * @param limit:最大返回结果数  ;
+     * @return List&lt;T&gt; 查询结果 
+     */
+	@Override
+	public &lt;T&gt; List&lt;T&gt; queryList(List&lt;T&gt; list, Predicate&lt;T&gt; where, Function&lt;T, String&gt; groupBy, Comparator&lt;T&gt; orderBy, int limit) {
+<span class="fc" id="L29">		 long startTime = System.currentTimeMillis();</span>
+	
+<span class="fc" id="L31">		  List&lt;T&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">		    if(where != null ) {</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">			    for(T e: list){</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">			        if(where.test(e)){</span>
+<span class="fc" id="L35">			            result.add(e);</span>
+			        }
+			    }
+<span class="fc" id="L38">		    }else {</span>
+<span class="fc" id="L39">		    	result = list;</span>
+		    }
+<span class="fc bfc" id="L41" title="All 2 branches covered.">		    if(orderBy != null ) {</span>
+<span class="fc" id="L42">		    	 result =list.stream().sorted(orderBy).collect(Collectors.toList()); </span>
+		    }
+		    
+<span class="fc" id="L45">		    List&lt;T&gt; grouped = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">		    if(groupBy != null ) { </span>
+<span class="fc" id="L47">		    	 Map&lt;String, List&lt;T &gt;&gt; groupedMap = result.stream()</span>
+<span class="fc" id="L48">		 				.collect(Collectors.groupingBy( groupBy ) ) ;</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">		    	 for (Map.Entry&lt;String,List&lt;T&gt;&gt; entry : groupedMap.entrySet()){</span>
+<span class="fc" id="L50">		    		 grouped.add(entry.getValue().get(0));</span>
+		    		} 
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">		    	 if(orderBy!=null) {</span>
+		    	
+<span class="fc" id="L54">			    	  grouped =grouped.stream().sorted(orderBy).collect(Collectors.toList()); </span>
+		    	 }
+		    
+<span class="fc" id="L57">		    } else {</span>
+<span class="fc" id="L58">		    	grouped =result;</span>
+		    }
+<span class="pc bpc" id="L60" title="2 of 4 branches missed.">		   if( limit&gt; 0 &amp;&amp;  limit &lt; grouped.size() ) {</span>
+<span class="fc" id="L61">			  grouped = grouped.subList(0, limit);</span>
+		   } 
+			// 输出字符串
+<span class="fc" id="L64">			System.out.println( &quot;queryList finished and cost:&quot; +(System.currentTimeMillis() - startTime));</span>
+<span class="fc" id="L65">		    return grouped;</span>
+	 
+	}
+ 
+}
+  
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
